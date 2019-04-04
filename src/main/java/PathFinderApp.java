@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class PathFinderApp {
 
     static String graph[][] = null;
+    static String graphResult[][] = null;
 
     static int V = 39;
 
@@ -20,9 +21,9 @@ public class PathFinderApp {
         PathFinderApp pathFinderApp = new PathFinderApp();
         //System.out.println(pathFinderApp.getFile("map.txt"));
 
-        pathFinderApp.getFile("map.txt");
+//        pathFinderApp.getFile("map.txt");
         findShortestPath();
-        writeResultFile();
+        //  writeResultFile();
     }
 
     private static void findShortestPath() {
@@ -36,145 +37,152 @@ public class PathFinderApp {
         dijkstra(graph, 0);
     }
 
-    private static int minDistance(int dist[], Boolean sptSet[]) {
+    private static int minDistance(int dist[], Boolean shortestPathTree[]) {
         // Initialize min value
-        int min = Integer.MAX_VALUE, min_index = -1;
+        int min = Integer.MAX_VALUE, index = -1;
 
         for (int v = 0; v < V; v++)
-            if (sptSet[v] == false && dist[v] <= min) {
+            if (shortestPathTree[v] == false && dist[v] <= min) {
                 min = dist[v];
-                min_index = v;
+                index = v;
             }
 
-        return min_index;
+        return index;
     }
 
     private static void dijkstra(String graph[][], int src) {
-        int dist[] = new int[V]; // The output array. dist[i] will hold
+        int distance[] = new int[V]; // The output array. distance[i] will hold
         // the shortest distance from src to i
 
-        // sptSet[i] will true if vertex i is included in shortest
+        // shortestPathTree[i] will true if vertex i is included in shortest
         // path tree or shortest distance from src to i is finalized
-        Boolean sptSet[] = new Boolean[V];
+        Boolean shortestPathTree[] = new Boolean[V];
 
-        // Initialize all distances as INFINITE and stpSet[] as false
+        // Initialize all distances as INFINITE and shortestPathTree[] as false
         for (int i = 0; i < V; i++) {
-            dist[i] = Integer.MAX_VALUE;
-            sptSet[i] = false;
+            distance[i] = Integer.MAX_VALUE;
+            shortestPathTree[i] = false;
         }
 
         // Distance of source vertex from itself is always 0
-        dist[src] = 0;
+        distance[src] = 0;
 
         // Find shortest path for all vertices
-        for (int count = 0; count < V - 1; count++) {
+        for (int vCount = 0; vCount < V - 1; vCount++) {
             // Pick the minimum distance vertex from the set of vertices
             // not yet processed. u is always equal to src in first
             // iteration.
-            int u = minDistance(dist, sptSet);
+            int u = minDistance(distance, shortestPathTree);
 
             // Mark the picked vertex as processed
-            sptSet[u] = true;
+            shortestPathTree[u] = true;
 
-            // Update dist value of the adjacent vertices of the
+            // Update distance value of the adjacent vertices of the
             // picked vertex.
-            for (int v = 0; v < V; v++)
+            for (int v = 0; v < V; v++) {
+//                System.out.println("vertex:: " + v);
+//                System.out.println("graphResult[u]:: " + graphResult[u]);
+//                graphResult[u][v] = "\"";
 
-                // Update dist[v] only if is not in sptSet, there is an
+                // Update distance[v] only if is not in shortestPathTree, there is an
                 // edge from u to v, and total weight of path from src to
-                // v through u is smaller than current value of dist[v]
-                if (!sptSet[v] && graph[u][v] != 0 &&
-                        dist[u] != Integer.MAX_VALUE &&
-                        dist[u] + graph[u][v] < dist[v]){
-
-                    dist[v] = dist[u] + graph[u][v];
-
-                    if("E" == graph[u][v])
-                        break;
-                }
-
+                // v through u is smaller than current value of distance[v]
+//                if (!shortestPathTree[v] && graph[u][v] != "W" &&
+//                        distance[u] != Integer.MAX_VALUE ){
+//
+//                    //distance[v] = distance[u] + graph[u][v];
+//                    distance[v] = 0;
+//                    graphResult[u][v] = "*";
+//
+//                    if("E" == graph[u][v])
+//                        break;
+//                }
+            }
         }
 
         // print the constructed distance array
-        //printSolution(dist, V);
+        //printSolution(distance, V);
     }
 
-    private static void writeResultFile() {
-        try {
-            FileWriter fw = new FileWriter("output.txt");
+//    private static void writeResultFile() {
+//        try {
+//            FileWriter fw = new FileWriter("output.txt");
+//
+//            // read character wise from string and write
+//            // into FileWriter
+//
+//            for (int i = 0; i < graphResult.length; i++) {
+//                for (int y = 0; y < graphResult[i].length; y++) {
+//                    fw.write(graphResult[i][y]);
+//                }
+//                fw.write("\n");
+//            }
+//
+//
+//            System.out.println("Writing successful");
+//            //close the file
+//            fw.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-            // read character wise from string and write
-            // into FileWriter
-
-            for (int i = 0; i < graph.length; i++) {
-                for (int y = 0; y < graph[i].length; y++) {
-                    fw.write(graph[i][y]);
-                }
-                fw.write("\n");
-            }
-
-
-            System.out.println("Writing successful");
-            //close the file
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String getFile(String fileName) {
-
-        //StringBuilder result = new StringBuilder("");
-
-        //Get file from resources folder
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource(fileName).getFile());
-
-        int lineCount = 0;
-
-        try (Scanner scanner = new Scanner(file)) {
-
-            while (scanner.hasNextLine()) {
-                scanner.nextLine();
-                lineCount++;
-            }
-
-            scanner.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        int currentLine = 0;
-        try (Scanner scanner = new Scanner(file)) {
-
-            graph = new char[lineCount][];
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                line = line.trim();
-                int charCount = 0;
-
-                System.out.println("length: " + line.length());
-                char lineItems[] = new char[line.length()];
-                for (int i = 0; i < line.length(); i++) {
-                    lineItems[charCount] = line.charAt(i);
-                    charCount++;
-                }
-                graph[currentLine] = lineItems;
-                currentLine++;
-                //result.append(line).append("\n");
-            }
-
-            scanner.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //return result.toString();
-        return "";
-
-    }
+//    private String getFile(String fileName) {
+//
+//        //StringBuilder result = new StringBuilder("");
+//
+//        //Get file from resources folder
+//        ClassLoader classLoader = getClass().getClassLoader();
+//        File file = new File(classLoader.getResource(fileName).getFile());
+//
+//        int lineCount = 0;
+//
+//        try (Scanner scanner = new Scanner(file)) {
+//
+//            while (scanner.hasNextLine()) {
+//                scanner.nextLine();
+//                lineCount++;
+//            }
+//
+//            scanner.close();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        int currentLine = 0;
+//        try (Scanner scanner = new Scanner(file)) {
+//
+//            graph = new String[lineCount][];
+//            graphResult = new String[lineCount][];
+//            while (scanner.hasNextLine()) {
+//                String line = scanner.nextLine();
+//                line = line.trim();
+//                line.replaceAll("\\s+","");
+//                int charCount = 0;
+//
+//                System.out.println("length: " + line.length());
+//                String lineItems[] = new String[line.length()];
+//                for (int i = 0; i < line.length(); i++) {
+//                    lineItems[charCount] = "" + line.charAt(i);
+//                    charCount++;
+//                }
+//                graph[currentLine] = lineItems;
+//                graphResult[currentLine] = lineItems;
+//                currentLine++;
+//                //result.append(line).append("\n");
+//            }
+//
+//            scanner.close();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        //return result.toString();
+//        return "";
+//
+//    }
 
 //    private String getFile(String fileName) {
 //
