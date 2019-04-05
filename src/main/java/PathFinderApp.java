@@ -23,7 +23,9 @@ public class PathFinderApp {
         System.out.println("The app was started");
 
         PathFinderApp pathFinderApp = new PathFinderApp();
-        pathFinderApp.getFile("map.txt");
+
+        System.out.println("looking for file map.txt at location: " + args[0]);
+        pathFinderApp.getFile(args[0] + "\\map.txt");
         pathFinderApp.findLocale();
         pathFinderApp.findShortestPath_BFS();
         Util.writeResultFiles(graph, graphResult);
@@ -117,37 +119,25 @@ public class PathFinderApp {
         int a = destinationVertex.getY();
         int b = destinationVertex.getX();
 
-        // create an empty queue
         Queue<Vertex> q = new ArrayDeque<>();
         q.add(new Vertex(i, j, 0));
 
-        // stores length of longest path from source to destination
         int min_dist = Integer.MAX_VALUE;
 
-        // run till queue is not empty
         while (!q.isEmpty()) {
-            // pop front vertex from queue and process it
             Vertex vertex = q.poll();
 
-            // (i, j) represents current cell and dist stores its
-            // minimum distance from the source
             i = vertex.getY();
             j = vertex.getX();
             int dist = vertex.getDist();
 
-            // if destination is found, update min_dist and stop
             if (i == a && j == b) {
                 min_dist = dist;
                 break;
             }
 
-            // check for all 4 possible movements from current cell
-            // and enqueue each valid movement
             for (int k = 0; k < 4; k++) {
-                // check if it is possible to go to position
-                // (i + row[k], j + col[k]) from current position
                 if (moveToVertex(i + row[k], j + col[k])) {
-                    // mark next cell as visited and enqueue it
                     graphResult[i + row[k]][j + col[k]] = "\"";
                     q.add(new Vertex(i + row[k], j + col[k], dist + 1));
                 }
@@ -155,15 +145,15 @@ public class PathFinderApp {
         }
 
         if (min_dist != Integer.MAX_VALUE) {
-            System.out.print("The shortest path from source to destination "
-                    + "has length " + min_dist + "\n");
+            System.out.print("Found shortest path from start to destination\n");
         } else {
-            System.out.print("Destination can't be reached from source"+ "\n");
+            System.out.print("Could not reach destination"+ "\n");
         }
     }
 
     private static boolean moveToVertex(int row, int col) {
         return (row >= 0) && (row < graphResult.length) && (col >= 0) && (col < graphResult[row].length)//maybe row -1
-                && !"W".equals(graph[row][col]) && !"\"".equals(graphResult[row][col]);
+                && !"W".equals(graph[row][col]) && !"\"".equals(graphResult[row][col])
+                && startVertex.getY() != row &&  startVertex.getX() != col;
     }
 }
