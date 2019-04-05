@@ -8,7 +8,7 @@ To Run the application place a file named **map.txt** in a location of your choi
 * Open CMD
 * CD PROJECT_ROOT\src\main\java
 * run: javac PathFinderApp.java
-* run: java PathFinderApp MAP_FOLDER (eg. C:\Users\mkhize\Desktop)
+* run: java PathFinderApp MAP_FOLDER (eg. java PathFinderApp C:\Users\mkhize\Desktop)
 
 The program will use the following legend:
 
