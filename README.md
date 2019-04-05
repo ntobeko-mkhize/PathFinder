@@ -9,7 +9,7 @@ To Run the application place a file named map.txt in the projects resource folde
 * . - Clear Path, ie one can move to this cell
 * S - Start
 * E - End
-* * - Path taken
+* \* - Path taken
 * " - Visited
 
 After a sucessfull run two new files will be created at the root of the project. input.txt will contain the ingested map which was used for processing, and output.txt which will contain the processed results.
