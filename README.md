@@ -19,7 +19,7 @@ The program will use the following legend:
 * \* - Path taken
 * " - Visited
 
-After a sucessfull run two new files will be created at the root of the project. input.txt will contain the ingested map which was used for processing, and output.txt which will contain the processed results.
+After a sucessfull run two new files will be created at MAP_FOLDER. input.txt will contain the ingested map which was used for processing, and output.txt which will contain the processed results.
 
 ## Sample Map
 ```
