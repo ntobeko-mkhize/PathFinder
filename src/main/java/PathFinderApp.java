@@ -119,7 +119,6 @@ public class PathFinderApp {
 
         // create an empty queue
         Queue<Vertex> q = new ArrayDeque<>();
-
         q.add(new Vertex(i, j, 0));
 
         // stores length of longest path from source to destination
@@ -132,8 +131,8 @@ public class PathFinderApp {
 
             // (i, j) represents current cell and dist stores its
             // minimum distance from the source
-            i = vertex.getX();
-            j = vertex.getY();
+            i = vertex.getY();
+            j = vertex.getX();
             int dist = vertex.getDist();
 
             // if destination is found, update min_dist and stop
@@ -157,9 +156,9 @@ public class PathFinderApp {
 
         if (min_dist != Integer.MAX_VALUE) {
             System.out.print("The shortest path from source to destination "
-                    + "has length " + min_dist);
+                    + "has length " + min_dist + "\n");
         } else {
-            System.out.print("Destination can't be reached from source");
+            System.out.print("Destination can't be reached from source"+ "\n");
         }
     }
 

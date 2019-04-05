@@ -33,10 +33,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/PathFinderApp2.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/PathFinderApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="72" column="57" selection-start-line="72" selection-start-column="57" selection-end-line="72" selection-end-column="57" />
+            <state relative-caret-position="296">
+              <caret line="159" column="16" lean-forward="true" selection-start-line="159" selection-start-column="16" selection-end-line="159" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -73,18 +73,6 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/PathFinderApp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="25" column="10" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -116,10 +104,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/PathFinderApp.java" />
         <option value="$PROJECT_DIR$/src/main/java/Vertex.java" />
         <option value="$PROJECT_DIR$/src/main/java/Util.java" />
         <option value="$PROJECT_DIR$/src/main/java/PathFinderApp2.java" />
+        <option value="$PROJECT_DIR$/src/main/java/PathFinderApp.java" />
       </list>
     </option>
   </component>
@@ -197,7 +185,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.PathFinderApp2">
+  <component name="RunManager" selected="Application.PathFinderApp">
     <configuration name="PathFinderApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="PathFinderApp" />
       <module name="pathfinder.main" />
@@ -230,12 +218,12 @@
       <option name="presentableId" value="Default" />
       <updated>1554107905158</updated>
       <workItem from="1554107908506" duration="53312000" />
-      <workItem from="1554411361813" duration="8668000" />
+      <workItem from="1554411361813" duration="9585000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61980000" />
+    <option name="totallyTimeSpent" value="62897000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -357,10 +345,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/PathFinderApp2.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/PathFinderApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="72" column="57" selection-start-line="72" selection-start-column="57" selection-end-line="72" selection-end-column="57" />
+        <state relative-caret-position="296">
+          <caret line="159" column="16" lean-forward="true" selection-start-line="159" selection-start-column="16" selection-end-line="159" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
