@@ -3,7 +3,7 @@
 Pathfinder is a Java based app that can be used to find the shortest path between two vertices. It implements a Breadth First Search (BFS) algorithim.
 
 ## Running
-To Run the application place a file named **map.txt** in a location of your choice (**MAP_FOLDER*), if needed ensure that you run the application with elevated rights (admin). 
+To Run the application place a file named **map.txt** in a location of your choice (**MAP_FOLDER**), if needed ensure that you run the application with elevated rights (admin). 
 
 * Open CMD
 * CD PROJECT_ROOT\src\main\java
