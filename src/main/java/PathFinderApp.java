@@ -26,6 +26,7 @@ public class PathFinderApp {
 
         System.out.println("looking for file map.txt at location: " + args[0]);
         pathFinderApp.getFile(args[0] + "\\map.txt");
+        //pathFinderApp.getFile("map.txt");
         pathFinderApp.findLocale();
         pathFinderApp.findShortestPath_BFS();
         Util.writeResultFiles(graph, graphResult);
@@ -138,7 +139,10 @@ public class PathFinderApp {
 
             for (int k = 0; k < 4; k++) {
                 if (moveToVertex(i + row[k], j + col[k])) {
-                    graphResult[i + row[k]][j + col[k]] = "\"";
+                    if(!isStartVertex(i + row[k], j + col[k]) && !isDestinationVertex(i + row[k], j + col[k])){
+                        graphResult[i + row[k]][j + col[k]] = "\"";
+                    }
+                    
                     q.add(new Vertex(i + row[k], j + col[k], dist + 1));
                 }
             }
@@ -153,7 +157,14 @@ public class PathFinderApp {
 
     private static boolean moveToVertex(int row, int col) {
         return (row >= 0) && (row < graphResult.length) && (col >= 0) && (col < graphResult[row].length)//maybe row -1
-                && !"W".equals(graph[row][col]) && !"\"".equals(graphResult[row][col])
-                && startVertex.getY() != row &&  startVertex.getX() != col;
+                && !"W".equals(graph[row][col]) && !"\"".equals(graphResult[row][col]);
+    }
+
+    private static boolean isStartVertex(int row, int col){
+        return startVertex.getY() == row &&  startVertex.getX() == col;
+    }
+
+    private static boolean isDestinationVertex(int row, int col){
+        return destinationVertex.getY() == row &&  destinationVertex.getX() == col;
     }
 }
