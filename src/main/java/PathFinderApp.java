@@ -1,4 +1,6 @@
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Queue;
@@ -19,33 +21,39 @@ public class PathFinderApp {
     private static final int row[] = {-1, 0, 0, 1};
     private static final int col[] = {0, -1, 1, 0};
 
+    private static String FOLDER = "";
+
     public static void main(String[] args) {
         System.out.println("The app was started");
 
         PathFinderApp pathFinderApp = new PathFinderApp();
 
-        System.out.println("looking for file map.txt at location: " + args[0]);
-        pathFinderApp.getFile(args[0] + "\\map.txt");
+        FOLDER =  args[0];
+        String fileName = FOLDER + "\\map.txt";
+        System.out.println("looking for file, with fileName: " + fileName);
+        //String fileName = "C:\\Users\\qxx1390\\IdeaProjects\\pathfinder\\src\\main\\resources\\map.txt";
+
+        pathFinderApp.getFile(fileName);
         //pathFinderApp.getFile("map.txt");
         pathFinderApp.findLocale();
         pathFinderApp.findShortestPath_BFS();
-        Util.writeResultFiles(graph, graphResult);
+        Util.writeResultFiles(graph, graphResult, FOLDER);
 
         System.out.println("The app completed");
     }
 
     private String getFile(String fileName) {
-
-        //StringBuilder result = new StringBuilder("");
-
         //Get file from resources folder
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource(fileName).getFile());
+        System.out.println("found classLoader: " + classLoader);
+        System.out.println("found resource: " + classLoader.getResource(fileName));
+        //File file = new File(classLoader.getResource(fileName).getFile());
 
         int height = 0;
         int width = 0;
 
-        try (Scanner scanner = new Scanner(file)) {
+        //Scanner scanner = new Scanner(file)
+        try (Scanner scanner = new Scanner(new FileReader(fileName))) {
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -57,13 +65,12 @@ public class PathFinderApp {
             }
 
             scanner.close();
-
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         int currentLine = 0;
-        try (Scanner scanner = new Scanner(file)) {
+        try (Scanner scanner = new Scanner(new FileReader(fileName))) {
 
             graph = new String[height][width];
             graphResult = new String[height][width];
@@ -139,10 +146,10 @@ public class PathFinderApp {
 
             for (int k = 0; k < 4; k++) {
                 if (moveToVertex(i + row[k], j + col[k])) {
-                    if(!isStartVertex(i + row[k], j + col[k]) && !isDestinationVertex(i + row[k], j + col[k])){
+                    if (!isStartVertex(i + row[k], j + col[k]) && !isDestinationVertex(i + row[k], j + col[k])) {
                         graphResult[i + row[k]][j + col[k]] = "\"";
                     }
-                    
+
                     q.add(new Vertex(i + row[k], j + col[k], dist + 1));
                 }
             }
@@ -151,7 +158,7 @@ public class PathFinderApp {
         if (min_dist != Integer.MAX_VALUE) {
             System.out.print("Found shortest path from start to destination\n");
         } else {
-            System.out.print("Could not reach destination"+ "\n");
+            System.out.print("Could not reach destination" + "\n");
         }
     }
 
@@ -160,11 +167,11 @@ public class PathFinderApp {
                 && !"W".equals(graph[row][col]) && !"\"".equals(graphResult[row][col]);
     }
 
-    private static boolean isStartVertex(int row, int col){
-        return startVertex.getY() == row &&  startVertex.getX() == col;
+    private static boolean isStartVertex(int row, int col) {
+        return startVertex.getY() == row && startVertex.getX() == col;
     }
 
-    private static boolean isDestinationVertex(int row, int col){
-        return destinationVertex.getY() == row &&  destinationVertex.getX() == col;
+    private static boolean isDestinationVertex(int row, int col) {
+        return destinationVertex.getY() == row && destinationVertex.getX() == col;
     }
 }

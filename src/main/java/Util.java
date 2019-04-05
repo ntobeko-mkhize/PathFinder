@@ -7,10 +7,10 @@ import java.io.IOException;
  */
 public class Util {
 
-    public static void writeResultFiles(String graph[][], String graphResult[][]) {
+    public static void writeResultFiles(String graph[][], String graphResult[][], String FOLDER) {
         try {
             System.out.println("Writing to input.txt");
-            FileWriter fw = new FileWriter("input.txt");
+            FileWriter fw = new FileWriter(FOLDER + "\\input.txt");
 
             for (int i = 0; i < graph.length; i++) {
 
@@ -28,7 +28,7 @@ public class Util {
 
         try {
             System.out.println("Writing to output.txt");
-            FileWriter fw = new FileWriter("output.txt");
+            FileWriter fw = new FileWriter(FOLDER + "\\output.txt");
 
             for (int i = 0; i < graphResult.length; i++) {
 
