@@ -3,7 +3,14 @@
 Pathfinder is a Java based app that can be used to find the shortest path between two vertices. It implements a Breadth First Search (BFS) algorithim.
 
 ## Running
-To Run the application place a file named map.txt in the projects resource folder. The program will use the following legend:
+To Run the application place a file named **map.txt** in a location of your choice, if needed ensure that you run the application with elevated rights (admin). 
+
+* Open CMD
+* CD PROJECT_ROOT\src\main\java
+* run: javac PathFinderApp.java
+* run: java PathFinderApp MAP_FOLDER (eg. C:\Users\mkhize\Desktop)
+
+The program will use the following legend:
 
 * W - Obstacle or Wall
 * . - Clear Path, ie one can move to this cell
